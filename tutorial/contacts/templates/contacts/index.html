@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts</title>
+</head>
+<body>
+{% if contacts_list %}
+    <ul>
+    {% for contact in contacts_list %}
+        <li><a href="/contacts/{{ contact.id }}/">{{ contact.first_name }} {{  contact.last_name }} -- Ph: {{ contact.phone }}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+
+<form action="{% url 'contacts:create' %}" method="post">
+    {% csrf_token %}
+        <input type="text" name="first_name" id="first_name" placeholder="Enter First name" />
+        <input type="text" name="last_name" id="last_name" placeholder="Enter Last name" />
+        <input type="text" name="phone" id="phone" placeholder="Enter phone number" />
+
+        <input type="submit" value="create" />
+    </form>
+</body>
+</html>

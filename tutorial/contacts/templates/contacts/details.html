@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if contact %}
+    <form action="{% url 'contacts:update' contact.id %}" method="post">
+    {% csrf_token %}
+        <input type="text" name="first_name" id="first_name" value="{{ contact.first_name }}" />
+        <input type="text" name="last_name" id="last_name" value="{{ contact.last_name }}" />
+        <input type="text" name="phone" id="phone" value="{{ contact.phone }}" />
+
+        <input type="submit" value="edit" />
+</form>
+
+    <form action="{% url 'contacts:delete' contact.id %}" method="put">
+    {% csrf_token %}
+
+        <input type="submit" value="delete" />
+</form>
+{% else %}
+    <p>No contact is available.</p>
+{% endif %}
+</body>
+</html>
